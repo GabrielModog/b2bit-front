@@ -24,7 +24,7 @@ export class ApiAuthRepository implements AuthRepository {
 
       return response.data;
     } catch (error: any) {
-      const errorMessage = error.response?.data?.message || 'Erro ao fazer login';
+      const errorMessage = error.response?.data?.message || 'error: cannot not log in';
       throw new Error(errorMessage);
     }
   }
@@ -33,7 +33,7 @@ export class ApiAuthRepository implements AuthRepository {
     try {
       await this.apiService.post('/auth/logout/');
     } catch (error) {
-      console.warn('Erro ao fazer logout na API:', error);
+      console.warn('error: cannot logout:', error);
     } finally {
       localStorage.removeItem(this.TOKEN_KEY);
       localStorage.removeItem(this.USER_KEY);
@@ -46,20 +46,6 @@ export class ApiAuthRepository implements AuthRepository {
       return JSON.parse(userData);
     }
     return null;
-  }
-
-  async getProfile(): Promise<User> {
-    try {
-      const response = await this.apiService.get<User>('/auth/profile/');
-      const user = response.data;
-      
-      localStorage.setItem(this.USER_KEY, JSON.stringify(user));
-      
-      return user;
-    } catch (error: any) {
-      const errorMessage = error.response?.data?.message || 'Erro ao buscar perfil';
-      throw new Error(errorMessage);
-    }
   }
 
   isAuthenticated(): boolean {

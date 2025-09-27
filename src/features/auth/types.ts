@@ -36,6 +36,5 @@ export interface AuthRepository {
   login(credentials: LoginCredentials): Promise<LoginResponse>;
   logout(): Promise<void>;
   getCurrentUser(): Promise<User | null>;
-  getProfile(): Promise<User>;
   isAuthenticated(): boolean;
 }
