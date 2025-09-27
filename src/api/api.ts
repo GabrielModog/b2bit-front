@@ -31,7 +31,7 @@ export class ApiService {
         const isAuthLoginRequest =
           typeof requestUrl === 'string' && requestUrl.includes('/auth/login/') && method === 'post';
 
-        if ((status === 401 || status === 403) && !isAuthLoginRequest) {
+        if ((status === 401 || status === 403) && !isAuthLoginRequest && window.location.pathname !== '/login') {
           localStorage.removeItem('access_token');
           localStorage.removeItem('user_data');
           window.location.href = '/login';

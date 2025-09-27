@@ -1,6 +1,6 @@
 import { ApiService } from "@/api/api";
 import type { ProfileRepository } from "./types";
-import type { User } from "../auth";
+import type { User } from "@/features/auth";
 
 export class ApiProfileRepository implements ProfileRepository {
   private apiService: ApiService;
