@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: b2bfront-app:latest
+    ports:
+      - "80:80"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost/"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+
+  e2e_tests:
+    image: mcr.microsoft.com/playwright:v1.48.2-jammy
+    working_dir: /work
+    environment:
+      - CI=true
+      - BASE_URL=http://app
+      - VITE_AUTH_MODE=local
+    volumes:
+      - .:/work
+      - /work/node_modules
+    depends_on:
+      app:
+        condition: service_healthy
+    entrypoint: ["/bin/bash", "/work/test.sh"]

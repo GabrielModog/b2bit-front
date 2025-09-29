@@ -20,7 +20,9 @@ export const LoginPage: React.FC = () => {
       toast.success('Logged in!');
       navigate('/profile');
     } catch (error) {
-      toast.error('Failed to authenticate, check if your email and password is right.');
+      toast.error('Failed to authenticate, check if your email and password is right.', {
+        testId: 'failed-auth'
+      });
     }
   }
 

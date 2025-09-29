@@ -21,7 +21,7 @@ export default defineConfig({
       "@": path.resolve(dirname, "./src"),
     },
   },
-    test: {
+  test: {
     environment: 'jsdom',
     setupFiles: ['src/test/vitest.setup.ts'],
     css: true,
@@ -29,7 +29,15 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reportsDirectory: './coverage',
-      reporter: ['text', 'html', 'lcov']
-    }
+      reporter: ['text', 'html', 'lcov'],
+    },
+    include: [
+      'src/**/*.test.{js,jsx,ts,tsx}'
+    ],
+    exclude: [
+      '**/node_modules/**',
+      '**/tests/**',
+      '**/dist/**',
+    ],
   }
 })

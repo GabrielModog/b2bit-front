@@ -2,13 +2,7 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '@/features/auth';
 
-interface ProtectedRouteProps {
-  privated: boolean;
-  children: React.ReactNode;
-}
-
-const ProtectedRoute: React.FC<ProtectedRouteProps> = (props) => {
-  const { privated = true, children } = props;
+const HomeRedirect: React.FC = () => {
   const { isAuthenticated, isLoading } = useAuth();
 
   if (isLoading) {
@@ -22,16 +16,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = (props) => {
     );
   }
 
-  if (!isAuthenticated && privated) {
-    return <Navigate to="/login" replace />;
-  }
-
-  if(isAuthenticated && !privated) {
-    console.log('aqui')
-    return <Navigate to="/profile" replace />;
-  }
-
-  return <>{children}</>;
+  return <Navigate to={isAuthenticated ? '/profile' : '/login'} replace />;
 };
 
-export default ProtectedRoute;
+export default HomeRedirect;

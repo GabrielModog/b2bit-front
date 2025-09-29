@@ -24,12 +24,12 @@ describe('LoginPage', () => {
     await userEvent.click(submit);
 
     // shows yup errors
-    expect(await screen.findByText(/email é obrigatório/i)).toBeInTheDocument();
-    expect(await screen.findByText(/senha é obrigatória/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Email is required/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Senha is required/i)).toBeInTheDocument();
 
     await userEvent.type(email, 'invalid');
     await userEvent.click(submit);
-    expect(await screen.findByText(/email inválido/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Invalid e-mail/i)).toBeInTheDocument();
 
     await userEvent.clear(email);
     await userEvent.type(email, 'test@example.com');
