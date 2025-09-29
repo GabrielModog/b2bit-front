@@ -84,7 +84,7 @@ export const LoginPage: React.FC = () => {
                   size="lg"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? 'Entrando...' : 'Sign In'}
+                  {isSubmitting ? 'Sending...' : 'Sign In'}
                 </Button>
               </Form>
             )}
